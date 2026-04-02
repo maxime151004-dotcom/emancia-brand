@@ -8,31 +8,36 @@ export const brand: BrandKit = {
   colors: {
     primary: {
       teal: {
-        hex: '#19908A',
+        hex: '#1A8F8A',
         name: 'Teal Emancia',
         usage: 'Couleur principale — logo, titres, liens, éléments interactifs',
       },
       tealDark: {
-        hex: '#0F5E5A',
+        hex: '#106C68',
         name: 'Teal foncé',
         usage: 'Hover, états actifs, contrastes renforcés',
       },
       blancNaturel: {
-        hex: '#F4F7F0',
-        name: 'Blanc naturel',
+        hex: '#F2F5EE',
+        name: 'Blanc cassé',
         usage: 'Fond principal, espaces de respiration',
       },
       prune: {
-        hex: '#6B3A5D',
-        name: 'Prune',
+        hex: '#7A4F6D',
+        name: 'Prune doux',
         usage: 'CTA, accents, éléments distinctifs',
       },
     },
     secondary: {
       tealClair: {
-        hex: '#E6F2F1',
+        hex: '#5BBAB5',
         name: 'Teal clair',
-        usage: 'Fonds de sections, cartes, zones mises en avant',
+        usage: 'Fonds de sections, badges, highlights, respiration visuelle',
+      },
+      sauge: {
+        hex: '#A8C280',
+        name: 'Sauge révisée',
+        usage: 'Illustrations, décorations, fonds secondaires (jamais pour du texte)',
       },
       grisTexte: {
         hex: '#4A4A4A',
@@ -99,18 +104,19 @@ export const brand: BrandKit = {
   palettes: [
     {
       id: 'A',
-      name: 'Teal & Prune',
-      subtitle: 'Palette originale',
-      description: 'La palette fondatrice d\'Emancia. Le teal incarne la confiance et la sérénité, complété par le prune pour les accents distinctifs.',
+      name: 'Teal & Prune doux',
+      subtitle: 'Palette principale — Option 04',
+      description: 'Palette validée par l\'audit chromatique. Le teal incarne expertise et confiance, le prune doux apporte chaleur et émancipation, la sauge soutient douceur et ouverture.',
       colors: {
         primary: {
-          teal: { hex: '#19908A', name: 'Teal Emancia', usage: 'Couleur principale — logo, titres, liens, éléments interactifs' },
-          tealDark: { hex: '#0F5E5A', name: 'Teal foncé', usage: 'Hover, états actifs, contrastes renforcés' },
-          blancNaturel: { hex: '#F4F7F0', name: 'Blanc naturel', usage: 'Fond principal, espaces de respiration' },
-          prune: { hex: '#6B3A5D', name: 'Prune', usage: 'CTA, accents, éléments distinctifs' },
+          teal: { hex: '#1A8F8A', name: 'Teal Emancia', usage: 'Couleur principale — logo, titres, liens, éléments interactifs' },
+          tealDark: { hex: '#106C68', name: 'Teal foncé', usage: 'Hover, états actifs, contrastes renforcés' },
+          blancCasse: { hex: '#F2F5EE', name: 'Blanc cassé', usage: 'Fond principal, espaces de respiration' },
+          prune: { hex: '#7A4F6D', name: 'Prune doux', usage: 'CTA, accents, éléments distinctifs' },
         },
         secondary: {
-          tealClair: { hex: '#E6F2F1', name: 'Teal clair', usage: 'Fonds de sections, cartes, zones mises en avant' },
+          tealClair: { hex: '#5BBAB5', name: 'Teal clair', usage: 'Fonds de sections, badges, highlights, respiration visuelle' },
+          sauge: { hex: '#A8C280', name: 'Sauge révisée', usage: 'Illustrations, décorations, fonds secondaires' },
           grisTexte: { hex: '#4A4A4A', name: 'Gris texte', usage: 'Texte courant, paragraphes' },
           grisLeger: { hex: '#E8E8E8', name: 'Gris léger', usage: 'Bordures, séparateurs, fonds subtils' },
           bleuNuit: { hex: '#1A2B3C', name: 'Bleu nuit', usage: 'Texte sur fond clair, titres sombres, footer' },

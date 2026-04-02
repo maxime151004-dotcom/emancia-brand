@@ -2,13 +2,14 @@
 
 @theme {
   /* Primary */
-  --color-teal: #19908A;
-  --color-teal-dark: #0F5E5A;
-  --color-blanc-naturel: #F4F7F0;
-  --color-prune: #6B3A5D;
+  --color-teal: #1A8F8A;
+  --color-teal-dark: #106C68;
+  --color-blanc-naturel: #F2F5EE;
+  --color-prune: #7A4F6D;
 
   /* Secondary */
-  --color-teal-clair: #E6F2F1;
+  --color-teal-clair: #5BBAB5;
+  --color-sauge: #A8C280;
   --color-gris-texte: #4A4A4A;
   --color-gris-leger: #E8E8E8;
   --color-bleu-nuit: #1A2B3C;
