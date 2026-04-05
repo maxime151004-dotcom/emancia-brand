@@ -151,7 +151,7 @@ function PaletteHero() {
             <p className="font-mono text-sm font-bold text-gris-texte">{brand.colors.primary.blancCasse.hex}</p>
             <p className="font-mono text-xs text-gris-texte/60 mt-1">RGB : {hexToRgb(brand.colors.primary.blancCasse.hex)}</p>
           </div>
-          <div className="flex-1 h-16 rounded-full border border-gris-leger/50" style={{ backgroundColor: brand.colors.primary.blancCasse.hex }} />
+          <div className="flex-1 h-16 rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.06)]" style={{ backgroundColor: brand.colors.primary.blancCasse.hex }} />
           <div className="w-48 shrink-0 pl-6">
             <p className="text-sm font-semibold text-gris-texte">Blanc cassé</p>
             <p className="text-xs text-gris-texte/60">Fond & clarté</p>
@@ -210,13 +210,13 @@ export default function CouleursPage() {
         <h2 className="text-2xl font-semibold mb-6">Valeurs fondatrices</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            { title: 'Rigueur & Qualité', desc: 'Contenus fiables, sourcés, pédagogiquement solides. Crédibilité par l\'excellence.' },
-            { title: 'Transparence', desc: 'Honnêteté dans la communication, clarté des sources, absence de conflit d\'intérêt.' },
-            { title: 'Émancipation', desc: 'Donner à chacun les outils pour devenir financièrement autonome et libre.' },
-            { title: 'Authenticité', desc: 'Pas de fausses promesses, pas de financement opaque. Une marque sincère et proche.' },
+            { title: 'Rigueur & Qualité', desc: 'Contenus fiables, sourcés, pédagogiquement solides. Crédibilité par l\'excellence.', color: brand.colors.primary.bleuNuit.hex },
+            { title: 'Transparence', desc: 'Honnêteté dans la communication, clarté des sources, absence de conflit d\'intérêt.', color: brand.colors.primary.teal.hex },
+            { title: 'Émancipation', desc: 'Donner à chacun les outils pour devenir financièrement autonome et libre.', color: brand.colors.secondary.prune.hex },
+            { title: 'Authenticité', desc: 'Pas de fausses promesses, pas de financement opaque. Une marque sincère et proche.', color: brand.colors.secondary.sauge.hex },
           ].map((v) => (
-            <div key={v.title} className="bg-white rounded-xl p-5 border border-gris-leger/30">
-              <h3 className="font-semibold text-teal mb-1">{v.title}</h3>
+            <div key={v.title} className="bg-white rounded-xl p-5 border border-gris-leger/30 border-l-4" style={{ borderLeftColor: v.color }}>
+              <h3 className="font-semibold mb-1" style={{ color: v.color }}>{v.title}</h3>
               <p className="text-sm text-gris-texte/80 leading-relaxed">{v.desc}</p>
             </div>
           ))}
