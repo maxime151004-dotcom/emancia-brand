@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { User } from 'lucide-react'
 
 interface NavItem {
   href: string
@@ -87,8 +88,19 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-white/10">
-        <p className="text-xs text-white/40">v2.0 — Avril 2026</p>
+      <div className="p-4 border-t border-white/10 space-y-2">
+        <Link
+          href="/profil"
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
+            pathname === '/profil'
+              ? 'bg-teal text-white font-medium'
+              : 'text-white/70 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <User size={16} />
+          Mon profil
+        </Link>
+        <p className="text-xs text-white/40 px-4">v2.0 — Avril 2026</p>
       </div>
     </aside>
   )

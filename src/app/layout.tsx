@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { getGoogleFontsUrl } from '@/lib/brand'
-import { Sidebar } from '@/components/Sidebar'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -21,10 +20,7 @@ export default function RootLayout({
         <link href={getGoogleFontsUrl()} rel="stylesheet" />
       </head>
       <body className="flex min-h-screen">
-        <Sidebar />
-        <main className="flex-1 ml-64 p-12 max-w-4xl">
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   )
