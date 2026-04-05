@@ -248,15 +248,15 @@ export default function CouleursPage() {
                 {/* Large letter watermark */}
                 <span
                   className="absolute -right-4 -top-6 text-[120px] font-display font-bold leading-none pointer-events-none select-none"
-                  style={{ color: v.lightText ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' }}
+                  style={{ color: 'rgba(255,255,255,0.1)' }}
                 >
                   {v.title[0]}
                 </span>
                 <div className="relative z-10">
-                  <h3 className={`font-display text-xl font-semibold mb-1 ${v.lightText ? 'text-white' : 'text-bleu-nuit'}`}>
+                  <h3 className="font-display text-xl font-semibold mb-1" style={{ color: '#ffffff' }}>
                     {v.title}
                   </h3>
-                  <p className={`text-sm font-mono ${v.lightText ? 'text-white/60' : 'text-bleu-nuit/50'}`}>
+                  <p className="text-sm font-mono" style={{ color: 'rgba(255,255,255,0.6)' }}>
                     {v.colorName} — {v.hex}
                   </p>
                 </div>
