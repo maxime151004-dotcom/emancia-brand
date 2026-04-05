@@ -60,3 +60,27 @@ h1, h2, h3, h4 {
 code, pre, .font-mono {
   font-family: var(--font-mono);
 }
+
+/* Sidebar thin scrollbar */
+.sidebar-scroll ::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.sidebar-scroll ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Firefox */
+.sidebar-scroll * {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}

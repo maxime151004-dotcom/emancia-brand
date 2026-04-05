@@ -1,5 +1,6 @@
 import { PageHeader } from '@/components/PageHeader'
 import { brand } from '@/lib/brand'
+import Image from 'next/image'
 
 export default function ContextesPage() {
   return (
@@ -15,14 +16,14 @@ export default function ContextesPage() {
         <div className="rounded-xl overflow-hidden border border-gris-leger/30">
           <div className="bg-bleu-nuit px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-teal flex items-center justify-center text-white font-display font-bold text-sm">E</div>
+              <Image src="/logos/logo-icon.svg" alt="Emancia" width={28} height={28} className="brightness-0 invert" />
               <span className="font-display text-white font-semibold">Emancia</span>
             </div>
             <div className="flex items-center gap-6">
               <span className="text-white/70 text-sm hover:text-white transition-colors">Apprendre</span>
               <span className="text-white/70 text-sm hover:text-white transition-colors">Articles</span>
               <span className="text-white/70 text-sm hover:text-white transition-colors">Outils</span>
-              <span className="bg-prune text-white text-sm px-4 py-1.5 rounded-lg">S'inscrire</span>
+              <span className="bg-prune text-white text-sm px-4 py-1.5 rounded-lg">S&apos;inscrire</span>
             </div>
           </div>
         </div>
@@ -30,22 +31,28 @@ export default function ContextesPage() {
 
       {/* Email header mockup */}
       <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-4">En-tête d'email</h2>
+        <h2 className="text-xl font-semibold mb-4">En-tête d&apos;email</h2>
         <div className="rounded-xl overflow-hidden border border-gris-leger/30 max-w-lg mx-auto">
-          <div className="bg-teal px-8 py-6 text-center">
-            <div className="inline-flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 rounded-md bg-white/20 flex items-center justify-center text-white font-display font-bold text-xs">E</div>
-              <span className="font-display text-white font-semibold text-lg">Emancia</span>
+          <div className="bg-teal px-8 py-6 text-center relative overflow-hidden">
+            {/* Subtle background pattern */}
+            <div className="absolute inset-0 opacity-[0.06] flex items-center justify-center">
+              <Image src="/logos/logo-icon.svg" alt="" width={200} height={200} className="brightness-0 invert" />
             </div>
-            <p className="text-white/80 text-sm">Éducation Financière</p>
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2.5 mb-2">
+                <Image src="/logos/logo-icon.svg" alt="Emancia" width={24} height={24} className="brightness-0 invert" />
+                <span className="font-display text-white font-semibold text-lg">Emancia</span>
+              </div>
+              <p className="text-white/80 text-sm">Éducation Financière</p>
+            </div>
           </div>
           <div className="bg-white p-8">
             <h3 className="font-display text-xl font-semibold text-bleu-nuit mb-3">Votre guide de la semaine</h3>
             <p className="text-sm text-gris-texte leading-relaxed mb-4">
-              Découvrez nos derniers articles sur l'investissement responsable et apprenez à construire un portefeuille diversifié, étape par étape.
+              Découvrez nos derniers articles sur l&apos;investissement responsable et apprenez à construire un portefeuille diversifié, étape par étape.
             </p>
             <div className="inline-block bg-teal text-white text-sm px-5 py-2 rounded-lg">
-              Lire l'article
+              Lire l&apos;article
             </div>
           </div>
         </div>
@@ -57,22 +64,22 @@ export default function ContextesPage() {
         <div className="flex items-center gap-8 justify-center">
           {/* Circular */}
           <div className="text-center">
-            <div className="w-20 h-20 rounded-full bg-teal flex items-center justify-center text-white font-display font-bold text-2xl border-4 border-white shadow-lg">
-              E
+            <div className="w-20 h-20 rounded-full bg-teal flex items-center justify-center border-4 border-white shadow-lg overflow-hidden">
+              <Image src="/logos/logo-icon.svg" alt="Emancia" width={40} height={40} className="brightness-0 invert" />
             </div>
             <p className="text-xs text-gris-texte/60 mt-2">Circulaire</p>
           </div>
           {/* Square rounded */}
           <div className="text-center">
-            <div className="w-20 h-20 rounded-2xl bg-bleu-nuit flex items-center justify-center text-white font-display font-bold text-2xl shadow-lg">
-              E
+            <div className="w-20 h-20 rounded-2xl bg-bleu-nuit flex items-center justify-center shadow-lg overflow-hidden">
+              <Image src="/logos/logo-icon.svg" alt="Emancia" width={40} height={40} className="brightness-0 invert" />
             </div>
             <p className="text-xs text-gris-texte/60 mt-2">Carré arrondi</p>
           </div>
           {/* With background */}
           <div className="text-center">
-            <div className="w-20 h-20 rounded-full flex items-center justify-center font-display font-bold text-2xl text-teal shadow-lg" style={{ backgroundColor: brand.colors.primary.blancCasse.hex }}>
-              E
+            <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg overflow-hidden" style={{ backgroundColor: brand.colors.primary.blancCasse.hex }}>
+              <Image src="/logos/logo-icon.svg" alt="Emancia" width={40} height={40} />
             </div>
             <p className="text-xs text-gris-texte/60 mt-2">Fond clair</p>
           </div>
@@ -87,7 +94,7 @@ export default function ContextesPage() {
             <div className="grid grid-cols-3 gap-8 mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-6 h-6 rounded-md bg-teal flex items-center justify-center text-white font-display font-bold text-xs">E</div>
+                  <Image src="/logos/logo-icon.svg" alt="Emancia" width={22} height={22} className="brightness-0 invert" />
                   <span className="font-display text-white font-semibold">Emancia</span>
                 </div>
                 <p className="text-white/50 text-xs leading-relaxed">{brand.tagline}</p>
@@ -122,7 +129,7 @@ export default function ContextesPage() {
         <div className="max-w-sm">
           <div className="bg-white rounded-xl overflow-hidden border border-gris-leger/30 hover:shadow-lg transition-shadow">
             <div className="h-40 bg-teal/10 flex items-center justify-center">
-              <span className="text-teal/30 font-display text-4xl font-bold">Emancia</span>
+              <Image src="/logos/logo-main.svg" alt="Emancia" width={160} height={40} className="opacity-20" />
             </div>
             <div className="p-5">
               <div className="flex items-center gap-2 mb-2">
@@ -130,7 +137,7 @@ export default function ContextesPage() {
                 <span className="text-xs text-gris-texte/50">5 min</span>
               </div>
               <h3 className="font-display font-semibold text-bleu-nuit mb-1">Comprendre les ETF en 5 minutes</h3>
-              <p className="text-sm text-gris-texte/70 leading-relaxed">Guide simple pour comprendre ce qu'est un ETF et comment il peut vous aider à diversifier.</p>
+              <p className="text-sm text-gris-texte/70 leading-relaxed">Guide simple pour comprendre ce qu&apos;est un ETF et comment il peut vous aider à diversifier.</p>
             </div>
           </div>
         </div>
