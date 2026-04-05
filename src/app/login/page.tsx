@@ -53,20 +53,16 @@ export default function LoginPage() {
 
       {/* Login card */}
       <div className="relative z-10 w-full max-w-sm mx-4">
-        {/* Logo + title */}
+        {/* Logo with baseline */}
         <div className="text-center mb-8">
           <Image
-            src="/logos/logo-icon.svg"
-            alt="Emancia"
-            width={80}
+            src="/logos/logo-baseline.svg"
+            alt="Emancia — Éducation Financière"
+            width={280}
             height={80}
-            className="mx-auto mb-5 brightness-0 invert w-20 h-20"
+            className="mx-auto brightness-0 invert"
             priority
           />
-          <h1 className="font-display text-2xl font-semibold mb-1" style={{ color: '#ffffff' }}>
-            Emancia
-          </h1>
-          <p className="text-sm text-white/40">Charte Graphique — Espace interne</p>
         </div>
 
         {/* Form */}
