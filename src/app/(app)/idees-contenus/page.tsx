@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Plus, Pencil, Trash2, X, Check, Camera, Play, Briefcase, MessageCircle, Video, Lightbulb } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Check, Camera, Play, Briefcase, MessageCircle, Video, Lightbulb, ExternalLink } from 'lucide-react'
 
 interface ContentIdea {
   id: string
@@ -13,9 +13,35 @@ interface ContentIdea {
   content_type: string
   title: string
   description: string
+  link: string | null
   status: string
   created_at: string
   updated_at: string
+}
+
+function Linkify({ text }: { text: string }) {
+  const urlRegex = /(https?:\/\/[^\s<]+)/g
+  const parts = text.split(urlRegex)
+  return (
+    <>
+      {parts.map((part, i) =>
+        urlRegex.test(part) ? (
+          <a
+            key={i}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal underline underline-offset-2 hover:text-teal-dark transition-colors break-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {part.length > 60 ? part.slice(0, 57) + '...' : part}
+          </a>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  )
 }
 
 const PLATFORMS = [
@@ -81,6 +107,7 @@ export default function IdeesContenusPage() {
   const [formDescription, setFormDescription] = useState('')
   const [formPlatform, setFormPlatform] = useState('instagram')
   const [formContentType, setFormContentType] = useState('Post image')
+  const [formLink, setFormLink] = useState('')
   const [formStatus, setFormStatus] = useState('idee')
 
   const fetchIdeas = useCallback(async () => {
@@ -113,6 +140,7 @@ export default function IdeesContenusPage() {
   const resetForm = () => {
     setFormTitle('')
     setFormDescription('')
+    setFormLink('')
     setFormPlatform('instagram')
     setFormContentType('Post image')
     setFormStatus('idee')
@@ -123,6 +151,7 @@ export default function IdeesContenusPage() {
   const startEdit = (idea: ContentIdea) => {
     setFormTitle(idea.title)
     setFormDescription(idea.description)
+    setFormLink(idea.link || '')
     setFormPlatform(idea.platform)
     setFormContentType(idea.content_type)
     setFormStatus(idea.status)
@@ -141,6 +170,7 @@ export default function IdeesContenusPage() {
     const payload = {
       title: formTitle.trim(),
       description: formDescription.trim(),
+      link: formLink.trim() || null,
       platform: formPlatform,
       content_type: formContentType,
       status: formStatus,
@@ -307,6 +337,17 @@ export default function IdeesContenusPage() {
                 />
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-bleu-nuit mb-1.5">Lien <span className="text-gris-texte/30 font-normal">(optionnel)</span></label>
+                <input
+                  value={formLink}
+                  onChange={(e) => setFormLink(e.target.value)}
+                  placeholder="https://..."
+                  type="url"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gris-leger text-sm text-gris-texte placeholder:text-gris-texte/30 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/10 transition-all"
+                />
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-bleu-nuit mb-1.5">Plateforme</label>
@@ -424,7 +465,25 @@ export default function IdeesContenusPage() {
                     </div>
 
                     {idea.description && (
-                      <p className="text-sm text-gris-texte/70 leading-relaxed mb-2 line-clamp-2">{idea.description}</p>
+                      <p className="text-sm text-gris-texte/70 leading-relaxed mb-2 line-clamp-2">
+                        <Linkify text={idea.description} />
+                      </p>
+                    )}
+
+                    {idea.link && (
+                      <a
+                        href={idea.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs text-teal hover:text-teal-dark transition-colors mb-2 group/link"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink size={12} />
+                        <span className="underline underline-offset-2">
+                          {idea.link.replace(/^https?:\/\//, '').replace(/\/$/, '').slice(0, 50)}
+                          {idea.link.replace(/^https?:\/\//, '').replace(/\/$/, '').length > 50 ? '...' : ''}
+                        </span>
+                      </a>
                     )}
 
                     <div className="flex items-center gap-3 text-[11px] text-gris-texte/40">

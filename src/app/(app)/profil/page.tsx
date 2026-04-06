@@ -1,6 +1,7 @@
 import { createServerSupabase } from '@/lib/supabase/server'
 import { PageHeader } from '@/components/PageHeader'
 import { ProfileActions } from '@/components/ProfileActions'
+import { PromptTemplate } from '@/components/PromptTemplate'
 
 export default async function ProfilPage() {
   const supabase = await createServerSupabase()
@@ -62,6 +63,8 @@ export default async function ProfilPage() {
           </div>
 
           <ProfileActions />
+
+          <PromptTemplate />
         </div>
       </section>
     </>
