@@ -174,7 +174,7 @@ function ColorCard({ color }: { color: ColorDef }) {
   const light = !isLightColor(color.hex)
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
+    <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
       <div
         className="h-32 flex flex-col justify-end p-4"
         style={{ backgroundColor: color.hex }}
@@ -251,7 +251,7 @@ export default function CouleursPage() {
           subtitle="Du beige chaud au blanc pur : les nuances de fond utilisables pour créer de la profondeur et de la hiérarchie sans recourir à la couleur."
         />
 
-        <div className="grid grid-cols-7 gap-0 rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
+        <div className="grid grid-cols-7 gap-0 rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
           {blancCasseGradient.map((shade) => (
             <div key={shade.hex} className="flex flex-col">
               <div
@@ -292,7 +292,7 @@ export default function CouleursPage() {
 
         <div className="space-y-6">
           {/* Teal → Teal Clair */}
-          <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
+          <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
             <div className="flex items-center gap-6 p-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
@@ -309,7 +309,7 @@ export default function CouleursPage() {
           </div>
 
           {/* Bleu Nuit → Bleu Nuit Clair */}
-          <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
+          <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
             <div className="flex items-center gap-6 p-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
@@ -326,7 +326,7 @@ export default function CouleursPage() {
           </div>
 
           {/* Sauge standalone */}
-          <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
+          <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
             <div className="flex items-center gap-6 p-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
@@ -363,24 +363,26 @@ export default function CouleursPage() {
           subtitle="Adaptation de la palette pour les interfaces en mode sombre. Les fonds deviennent des bleus nuit profonds, le teal s'éclaircit pour conserver sa lisibilité."
         />
 
-        <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15">
+        <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15">
           <div className="p-8" style={{ backgroundColor: '#0F1A24' }}>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {darkModeColors.map((c) => {
-                const light = !isLightColor(c.hex)
+                const textOnSwatch = isLightColor(c.hex) ? '#1A2B3C' : '#FFFFFF'
                 return (
-                  <div key={c.hex} className="rounded-xl overflow-hidden border border-white/10">
+                  <div key={c.hex} className="rounded-lg overflow-hidden border border-white/10">
                     <div
-                      className="h-24 flex items-end p-3"
+                      className="h-28 flex flex-col justify-between p-4"
                       style={{ backgroundColor: c.hex }}
                     >
-                      <span className={`font-display text-sm font-semibold ${light ? 'text-white' : 'text-bleu-nuit'}`}>
+                      <span className="font-display text-sm font-semibold" style={{ color: textOnSwatch }}>
                         {c.name}
                       </span>
+                      <span className="text-[11px] font-mono" style={{ color: textOnSwatch, opacity: 0.7 }}>
+                        {c.hex}
+                      </span>
                     </div>
-                    <div className="p-3" style={{ backgroundColor: '#162535' }}>
-                      <p className="text-xs text-white/60 leading-relaxed">{c.usage}</p>
-                      <p className="text-[10px] font-mono text-white/40 mt-1">{c.hex}</p>
+                    <div className="p-4" style={{ backgroundColor: '#162535' }}>
+                      <p className="text-xs text-white/70 leading-relaxed">{c.usage}</p>
                     </div>
                   </div>
                 )
@@ -399,20 +401,23 @@ export default function CouleursPage() {
         />
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {functionalColors.map((c) => (
-            <div key={c.hex} className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
-              <div
-                className="h-20 flex items-end p-4"
-                style={{ backgroundColor: c.hex }}
-              >
-                <span className="font-display font-semibold text-sm" style={{ color: isLightColor(c.hex) ? '#1A2B3C' : '#FFFFFF' }}>{c.name}</span>
+          {functionalColors.map((c) => {
+            const textOnSwatch = isLightColor(c.hex) ? '#1A2B3C' : '#FFFFFF'
+            return (
+              <div key={c.name} className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
+                <div
+                  className="h-28 flex flex-col justify-between p-4"
+                  style={{ backgroundColor: c.hex }}
+                >
+                  <span className="font-display font-semibold text-sm" style={{ color: textOnSwatch }}>{c.name}</span>
+                  <span className="text-[11px] font-mono" style={{ color: textOnSwatch, opacity: 0.7 }}>{c.hex}</span>
+                </div>
+                <div className="bg-white p-4">
+                  <p className="text-xs text-bleu-nuit/70 leading-relaxed">{c.usage}</p>
+                </div>
               </div>
-              <div className="bg-white p-4">
-                <p className="text-xs text-bleu-nuit/70 leading-relaxed">{c.usage}</p>
-                <p className="text-[10px] font-mono text-bleu-nuit/40 mt-2">{c.hex}</p>
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
@@ -424,7 +429,7 @@ export default function CouleursPage() {
           subtitle="Référence rapide : quel élément utilise quelle couleur. À consulter avant chaque création de composant ou de support."
         />
 
-        <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
+        <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm">
           <table className="w-full">
             <thead>
               <tr className="bg-bleu-nuit text-white">
@@ -469,7 +474,7 @@ export default function CouleursPage() {
           {colorMeaning.map((c) => {
             const light = !isLightColor(c.hex)
             return (
-              <div key={c.hex} className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
+              <div key={c.hex} className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white">
                 {/* Color header */}
                 <div className="relative px-6 py-8 overflow-hidden" style={{ backgroundColor: c.hex }}>
                   <span
@@ -523,7 +528,7 @@ export default function CouleursPage() {
           subtitle="La règle de répartition des couleurs dans chaque composition. Respecter ces proportions garantit la cohérence visuelle sur tous les supports."
         />
 
-        <div className="rounded-2xl overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white p-8">
+        <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white p-8">
           {/* Visual proportion bar */}
           <div className="flex h-16 rounded-xl overflow-hidden mb-8 border border-[#2A4A5C]/15">
             <div className="flex items-center justify-center" style={{ width: '60%', backgroundColor: '#F2F5EE' }}>
