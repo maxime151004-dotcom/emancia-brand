@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { User, Lightbulb, Play, MessageCircle } from 'lucide-react'
-import { useUnreadComments } from '@/hooks/useUnreadComments'
+import { User, Lightbulb, Play } from 'lucide-react'
 
 interface NavItem {
   href: string
@@ -51,16 +50,8 @@ const navSections: NavSection[] = [
   },
 ]
 
-// Map href to page_slug used in CommentsSection
-function hrefToSlug(href: string): string {
-  if (href === '/') return 'identite'
-  return href.replace(/^\//, '')
-}
-
 export function Sidebar() {
   const pathname = usePathname()
-  const unreadMap = useUnreadComments()
-  const totalUnread = Array.from(unreadMap.values()).reduce((a, b) => a + b, 0)
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 bg-teal text-white flex flex-col sidebar-scroll">
@@ -73,15 +64,7 @@ export function Sidebar() {
             height={40}
             className="brightness-0 invert transition-transform group-hover:scale-[1.02]"
           />
-          <div className="flex items-center gap-2 mt-1.5 ml-0.5">
-            <p className="text-[11px] text-white/50">Charte Graphique</p>
-            {totalUnread > 0 && (
-              <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-prune text-white text-[9px] font-bold animate-pulse">
-                <MessageCircle size={9} />
-                {totalUnread}
-              </span>
-            )}
-          </div>
+          <p className="text-[11px] text-white/50 mt-1.5 ml-0.5">Charte Graphique</p>
         </Link>
       </div>
 
@@ -107,25 +90,17 @@ export function Sidebar() {
             <ul className="space-y-0.5">
               {section.items.map((item) => {
                 const isActive = pathname === item.href
-                const slug = hrefToSlug(item.href)
-                const unreadCount = unreadMap.get(slug) || 0
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`flex items-center justify-between px-4 py-2 rounded-lg text-sm transition-colors ${
+                      className={`block px-4 py-2 rounded-lg text-sm transition-colors ${
                         isActive
                           ? 'bg-white/20 text-white font-medium'
                           : 'text-white/70 hover:text-white hover:bg-white/10'
                       }`}
                     >
-                      <span>{item.label}</span>
-                      {unreadCount > 0 && (
-                        <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/20 text-[9px] font-bold">
-                          <MessageCircle size={9} />
-                          {unreadCount}
-                        </span>
-                      )}
+                      {item.label}
                     </Link>
                   </li>
                 )
