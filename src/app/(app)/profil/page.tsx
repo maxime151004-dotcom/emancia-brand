@@ -20,7 +20,7 @@ export default async function ProfilPage() {
       />
 
       <section className="mb-12">
-        <div className="bg-white rounded-2xl p-8 border border-gris-leger/30">
+        <div className="bg-white rounded-lg p-8 border border-gris-leger/30">
           <div className="flex items-center gap-5 mb-8">
             <div className="w-16 h-16 rounded-full bg-teal flex items-center justify-center text-white font-display font-bold text-2xl">
               {fullName.charAt(0).toUpperCase()}
@@ -32,7 +32,7 @@ export default async function ProfilPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div className="bg-blanc-casse rounded-xl p-4">
+            <div className="bg-blanc-casse rounded-lg p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-bleu-nuit/40 mb-1">Rôle</p>
               <div className="flex items-center gap-2">
                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
@@ -50,7 +50,7 @@ export default async function ProfilPage() {
               </p>
             </div>
 
-            <div className="bg-blanc-casse rounded-xl p-4">
+            <div className="bg-blanc-casse rounded-lg p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-bleu-nuit/40 mb-1">Membre depuis</p>
               <p className="text-sm font-medium text-bleu-nuit">
                 {new Date(user.created_at).toLocaleDateString('fr-FR', {

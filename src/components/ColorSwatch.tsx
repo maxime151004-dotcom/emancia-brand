@@ -21,7 +21,7 @@ export function ColorSwatch({ token }: { token: ColorToken }) {
   return (
     <div className="group cursor-pointer" onClick={handleCopy}>
       <div
-        className="h-24 rounded-xl mb-3 border border-gris-leger/30 transition-transform group-hover:scale-105 relative overflow-hidden"
+        className="h-24 rounded-lg mb-3 border border-gris-leger/30 transition-transform group-hover:scale-105 relative overflow-hidden"
         style={{ backgroundColor: token.hex }}
       >
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10">

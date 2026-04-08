@@ -14,7 +14,7 @@ export default function ContextesPage() {
       {/* Navbar mockup */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Barre de navigation</h2>
-        <div className="rounded-xl overflow-hidden border border-gris-leger/30">
+        <div className="rounded-lg overflow-hidden border border-gris-leger/30">
           <div className="bg-bleu-nuit px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Image src="/logos/logo-main.svg" alt="Emancia" width={120} height={30} className="brightness-0 invert" />
@@ -32,7 +32,7 @@ export default function ContextesPage() {
       {/* Email header mockup */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">En-tête d&apos;email</h2>
-        <div className="rounded-xl overflow-hidden border border-gris-leger/30 max-w-lg mx-auto">
+        <div className="rounded-lg overflow-hidden border border-gris-leger/30 max-w-lg mx-auto">
           <div className="bg-teal px-8 py-6 text-center relative overflow-hidden">
             {/* Subtle background pattern */}
             <div className="absolute inset-0 opacity-[0.06] flex items-center justify-center">
@@ -60,7 +60,7 @@ export default function ContextesPage() {
       {/* Email signature mockup */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Signature email</h2>
-        <div className="rounded-xl overflow-hidden border border-gris-leger/30 max-w-lg mx-auto">
+        <div className="rounded-lg overflow-hidden border border-gris-leger/30 max-w-lg mx-auto">
           <div className="bg-white p-6">
             <div className="border-t-2 border-teal pt-4">
               <div className="flex items-start gap-4">
@@ -113,7 +113,7 @@ export default function ContextesPage() {
       {/* Footer mockup */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Pied de page</h2>
-        <div className="rounded-xl overflow-hidden border border-gris-leger/30">
+        <div className="rounded-lg overflow-hidden border border-gris-leger/30">
           <div className="bg-bleu-nuit px-8 py-10">
             <div className="grid grid-cols-3 gap-8 mb-8">
               <div>
@@ -150,7 +150,7 @@ export default function ContextesPage() {
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Carte article</h2>
         <div className="max-w-sm">
-          <div className="bg-white rounded-xl overflow-hidden border border-gris-leger/30 hover:shadow-lg transition-shadow">
+          <div className="bg-white rounded-lg overflow-hidden border border-gris-leger/30 hover:shadow-lg transition-shadow">
             <div className="h-40 bg-bleu-nuit flex items-center justify-center">
               <Image src="/logos/logo-main.svg" alt="Emancia" width={160} height={40} className="brightness-0 invert opacity-30" />
             </div>

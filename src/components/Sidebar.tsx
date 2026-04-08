@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { User, Lightbulb, Play } from 'lucide-react'
+import { User, Lightbulb, Play, X } from 'lucide-react'
 
 interface NavItem {
   href: string
@@ -13,6 +13,11 @@ interface NavItem {
 interface NavSection {
   title: string
   items: NavItem[]
+}
+
+interface SidebarProps {
+  isOpen?: boolean
+  onClose?: () => void
 }
 
 const navSections: NavSection[] = [
@@ -51,13 +56,26 @@ const navSections: NavSection[] = [
   },
 ]
 
-export function Sidebar() {
+export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname()
 
-  return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-teal text-white flex flex-col sidebar-scroll">
+  const handleNavClick = () => {
+    if (onClose) onClose()
+  }
+
+  const sidebarContent = (
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-teal text-white flex flex-col sidebar-scroll z-40">
+      {/* Close button - mobile only */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 p-1 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors md:hidden"
+        aria-label="Fermer le menu"
+      >
+        <X size={20} />
+      </button>
+
       <div className="p-5 pb-4 border-b border-white/15">
-        <Link href="/" className="block group">
+        <Link href="/" className="block group" onClick={handleNavClick}>
           <Image
             src="/logos/logo-main.svg"
             alt="Emancia"
@@ -73,7 +91,8 @@ export function Sidebar() {
       <div className="px-4 pt-4">
         <Link
           href="/idees-contenus"
-          className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+          onClick={handleNavClick}
+          className={`flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
             pathname === '/idees-contenus'
               ? 'bg-white text-teal shadow-sm'
               : 'bg-white/15 text-white hover:bg-white/25 border border-white/10'
@@ -84,7 +103,7 @@ export function Sidebar() {
         </Link>
       </div>
 
-      <nav className="flex-1 p-4 overflow-y-auto">
+      <nav className="flex-1 p-4 overflow-y-auto" aria-label="Navigation principale">
         {navSections.map((section) => (
           <div key={section.title} className="mb-4">
             <p className="text-[10px] uppercase tracking-widest text-white/35 px-4 mb-1.5">{section.title}</p>
@@ -95,6 +114,7 @@ export function Sidebar() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      onClick={handleNavClick}
                       className={`block px-4 py-2 rounded-lg text-sm transition-colors ${
                         isActive
                           ? 'bg-white/20 text-white font-medium'
@@ -114,6 +134,7 @@ export function Sidebar() {
       <div className="p-4 border-t border-white/15 space-y-2">
         <Link
           href="/presentation"
+          onClick={handleNavClick}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             pathname === '/presentation'
               ? 'bg-white text-teal shadow-sm'
@@ -125,6 +146,7 @@ export function Sidebar() {
         </Link>
         <Link
           href="/profil"
+          onClick={handleNavClick}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
             pathname === '/profil'
               ? 'bg-white/20 text-white font-medium'
@@ -137,5 +159,28 @@ export function Sidebar() {
         <p className="text-xs text-white/30 px-4">v2.0 — Avril 2026</p>
       </div>
     </aside>
+  )
+
+  return (
+    <>
+      {/* Desktop sidebar - always visible */}
+      <div className="hidden md:block">
+        {sidebarContent}
+      </div>
+
+      {/* Mobile sidebar - overlay with backdrop */}
+      {isOpen && (
+        <div className="md:hidden" role="dialog" aria-modal="true">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 z-30"
+            onClick={onClose}
+            aria-hidden="true"
+          />
+          {/* Sidebar */}
+          {sidebarContent}
+        </div>
+      )}
+    </>
   )
 }

@@ -140,7 +140,7 @@ export function TokenExporter() {
         <div className="absolute top-3 right-3">
           <CopyButton text={format.content} label="Copier tout" />
         </div>
-        <pre className="rounded-xl bg-bleu-nuit p-5 pr-32 overflow-x-auto text-xs text-teal-clair font-mono leading-relaxed">
+        <pre className="rounded-lg bg-bleu-nuit p-5 pr-32 overflow-x-auto text-xs text-teal-clair font-mono leading-relaxed">
           {format.content}
         </pre>
       </div>

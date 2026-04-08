@@ -150,7 +150,7 @@ export default function TonEditorialPage() {
 
       {/* Philosophy */}
       <section className="mb-12">
-        <div className="rounded-2xl bg-teal/5 p-8 border border-teal/10">
+        <div className="rounded-lg bg-teal/5 p-8 border border-teal/10">
           <p className="text-base italic text-bleu-nuit/70 leading-relaxed">
             &ldquo;{toneOfVoice.philosophy}&rdquo;
           </p>
@@ -164,7 +164,7 @@ export default function TonEditorialPage() {
           {toneOfVoice.brandValues.map((value) => (
             <div
               key={value.label}
-              className="rounded-xl bg-white p-5 border border-gris-leger/30"
+              className="rounded-lg bg-white p-5 border border-gris-leger/30"
             >
               <h3 className="text-base font-semibold text-bleu-nuit mb-2">{value.label}</h3>
               <p className="text-sm text-bleu-nuit/70 leading-relaxed">{value.description}</p>
@@ -180,7 +180,7 @@ export default function TonEditorialPage() {
           {toneOfVoice.axes.map((axis) => (
             <div
               key={axis.label}
-              className="rounded-xl p-5"
+              className="rounded-lg p-5"
               style={{ backgroundColor: axis.bg }}
             >
               <div className="flex items-center gap-2 mb-3">
@@ -197,7 +197,7 @@ export default function TonEditorialPage() {
       {/* Ton par plateforme */}
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Ton par plateforme</h2>
-        <div className="overflow-x-auto rounded-xl border border-gris-leger/30">
+        <div className="overflow-x-auto rounded-lg border border-gris-leger/30">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-bleu-nuit/5">
@@ -226,7 +226,7 @@ export default function TonEditorialPage() {
           {toneOfVoice.personas.map((persona) => (
             <div
               key={persona.name}
-              className="rounded-xl bg-white p-5 border border-gris-leger/30"
+              className="rounded-lg bg-white p-5 border border-gris-leger/30"
             >
               <div className="flex items-baseline gap-2 mb-1">
                 <h3 className="text-base font-semibold text-bleu-nuit">{persona.name}</h3>
@@ -254,7 +254,7 @@ export default function TonEditorialPage() {
       {/* Forbidden & Preferred */}
       <section className="mb-12">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
             <h3 className="text-lg font-semibold text-error mb-4">Mots interdits</h3>
             <ul className="space-y-2">
               {toneOfVoice.forbiddenWords.map((w) => (
@@ -264,7 +264,7 @@ export default function TonEditorialPage() {
               ))}
             </ul>
           </div>
-          <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
             <h3 className="text-lg font-semibold text-success mb-4">Expressions préférées</h3>
             <ul className="space-y-2">
               {toneOfVoice.preferredPhrases.map((p) => (
@@ -281,7 +281,7 @@ export default function TonEditorialPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Règles de communication</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
             <h3 className="text-lg font-semibold text-success mb-4">On fait</h3>
             <ul className="space-y-2">
               {[
@@ -298,7 +298,7 @@ export default function TonEditorialPage() {
               ))}
             </ul>
           </div>
-          <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
             <h3 className="text-lg font-semibold text-error mb-4">On ne fait pas</h3>
             <ul className="space-y-2">
               {[

@@ -204,7 +204,7 @@ function SectionHeading({
   return (
     <div className="mb-8">
       <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center">
           <Icon size={20} className="text-teal" />
         </div>
         <h2 className="font-display text-2xl font-semibold text-bleu-nuit">{title}</h2>
@@ -598,7 +598,7 @@ export default function CouleursPage() {
 
         <div className="rounded-lg overflow-hidden border border-[#2A4A5C]/15 shadow-sm bg-white p-8">
           {/* Visual proportion bar */}
-          <div className="flex h-16 rounded-xl overflow-hidden mb-8 border border-[#2A4A5C]/15">
+          <div className="flex h-16 rounded-lg overflow-hidden mb-8 border border-[#2A4A5C]/15">
             <div className="flex items-center justify-center" style={{ width: '60%', backgroundColor: '#F2F5EE' }}>
               <span className="text-xs font-semibold text-bleu-nuit">60%</span>
             </div>
@@ -669,7 +669,7 @@ export default function CouleursPage() {
               body: 'Le texte principal utilise Bleu Nuit (#1A2B3C). Le texte secondaire utilise Bleu Nuit à 70% d\'opacité. Jamais de gris neutre : cela préserve la chaleur de la palette.',
             },
           ].map((rule) => (
-            <div key={rule.title} className="bg-white rounded-xl p-6 border border-[#2A4A5C]/15">
+            <div key={rule.title} className="bg-white rounded-lg p-6 border border-[#2A4A5C]/15">
               <h3 className="font-display font-semibold text-bleu-nuit mb-2">{rule.title}</h3>
               <p className="text-sm text-bleu-nuit/70 leading-relaxed font-body">{rule.body}</p>
             </div>

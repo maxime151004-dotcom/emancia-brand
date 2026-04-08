@@ -53,7 +53,7 @@ export default function IdentitePage() {
           ].map((value) => (
             <div
               key={value.name}
-              className="bg-white rounded-xl p-6 border border-gris-leger"
+              className="bg-white rounded-lg p-6 border border-gris-leger"
             >
               <h3 className="text-lg font-semibold text-teal mb-2">{value.name}</h3>
               <p className="text-sm leading-relaxed">{value.desc}</p>

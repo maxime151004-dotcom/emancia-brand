@@ -187,7 +187,7 @@ export function CommentsSection({ pageSlug }: { pageSlug: string }) {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Ajouter un commentaire..."
                 rows={2}
-                className="w-full px-4 py-2.5 rounded-xl border border-gris-leger/50 text-sm text-bleu-nuit placeholder:text-bleu-nuit/25 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/10 transition-all resize-none bg-white"
+                className="w-full px-4 py-2.5 rounded-lg border border-gris-leger/50 text-sm text-bleu-nuit placeholder:text-bleu-nuit/25 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/10 transition-all resize-none bg-white"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault()
@@ -199,7 +199,7 @@ export function CommentsSection({ pageSlug }: { pageSlug: string }) {
             <button
               type="submit"
               disabled={!message.trim() || loading}
-              className="p-2.5 rounded-xl bg-teal text-white hover:bg-teal-dark transition-colors disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
+              className="p-2.5 rounded-lg bg-teal text-white hover:bg-teal-dark transition-colors disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
             >
               <Send size={16} />
             </button>

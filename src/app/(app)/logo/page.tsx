@@ -17,7 +17,7 @@ export default function LogoPage() {
           {brand.logos.map((logo) => (
             <div
               key={logo.name}
-              className="bg-white rounded-xl p-8 border border-gris-leger"
+              className="bg-white rounded-lg p-8 border border-gris-leger"
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
@@ -49,7 +49,7 @@ export default function LogoPage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Zone de protection</h2>
-        <div className="bg-white rounded-xl p-8 border border-gris-leger">
+        <div className="bg-white rounded-lg p-8 border border-gris-leger">
           <p className="leading-relaxed mb-6 text-bleu-nuit/70">
             Le module de référence <strong className="text-bleu-nuit">&quot;x&quot;</strong> correspond
             à la hauteur des minuscules dans le logotype (43,9 unités SVG). La zone de
@@ -263,14 +263,14 @@ export default function LogoPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Tailles minimales</h2>
         <div className="grid grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl p-6 border border-gris-leger">
+          <div className="bg-white rounded-lg p-6 border border-gris-leger">
             <h3 className="font-semibold mb-2">Écran</h3>
             <p className="text-sm text-bleu-nuit/70">
               Logotype : min. <strong className="font-mono">120px</strong> de large<br />
               Symbole seul : min. <strong className="font-mono">32px</strong>
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 border border-gris-leger">
+          <div className="bg-white rounded-lg p-6 border border-gris-leger">
             <h3 className="font-semibold mb-2">Impression</h3>
             <p className="text-sm text-bleu-nuit/70">
               Logotype : min. <strong className="font-mono">30mm</strong> de large<br />
@@ -283,19 +283,19 @@ export default function LogoPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Déclinaisons chromatiques</h2>
         <div className="grid grid-cols-2 gap-6">
-          <div className="bg-blanc-naturel rounded-xl p-8 flex flex-col items-center justify-center gap-3 border border-gris-leger min-h-[140px]">
+          <div className="bg-blanc-naturel rounded-lg p-8 flex flex-col items-center justify-center gap-3 border border-gris-leger min-h-[140px]">
             <Image src="/logos/logo-main.svg" alt="Logo sur fond clair" width={180} height={45} className="h-10 w-auto" />
             <p className="text-xs text-bleu-nuit/50">Fond clair</p>
           </div>
-          <div className="bg-bleu-nuit rounded-xl p-8 flex flex-col items-center justify-center gap-3 min-h-[140px]">
+          <div className="bg-bleu-nuit rounded-lg p-8 flex flex-col items-center justify-center gap-3 min-h-[140px]">
             <Image src="/logos/logo-main.svg" alt="Logo sur fond sombre" width={180} height={45} className="h-10 w-auto brightness-0 invert" />
             <p className="text-xs text-white/30">Fond sombre</p>
           </div>
-          <div className="bg-teal rounded-xl p-8 flex flex-col items-center justify-center gap-3 min-h-[140px]">
+          <div className="bg-teal rounded-lg p-8 flex flex-col items-center justify-center gap-3 min-h-[140px]">
             <Image src="/logos/logo-main.svg" alt="Logo sur teal" width={180} height={45} className="h-10 w-auto brightness-0 invert" />
             <p className="text-xs text-white/40">Sur teal</p>
           </div>
-          <div className="bg-prune rounded-xl p-8 flex flex-col items-center justify-center gap-3 min-h-[140px]">
+          <div className="bg-prune rounded-lg p-8 flex flex-col items-center justify-center gap-3 min-h-[140px]">
             <Image src="/logos/logo-main.svg" alt="Logo sur prune" width={180} height={45} className="h-10 w-auto brightness-0 invert" />
             <p className="text-xs text-white/40">Sur prune</p>
           </div>

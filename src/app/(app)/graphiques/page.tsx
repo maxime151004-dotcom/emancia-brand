@@ -73,7 +73,7 @@ export default function GraphiquesPage() {
         <h2 className="text-xl font-semibold mb-4">Cartes KPI</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {kpiData.map((kpi) => (
-            <div key={kpi.label} className="bg-white rounded-xl p-5 border border-gris-leger/30">
+            <div key={kpi.label} className="bg-white rounded-lg p-5 border border-gris-leger/30">
               <p className="text-xs text-bleu-nuit/60 mb-1">{kpi.label}</p>
               <p className="text-2xl font-mono font-bold text-bleu-nuit">{kpi.value}</p>
               <p className={`text-xs font-medium mt-1 ${kpi.positive ? 'text-success' : 'text-error'}`}>
@@ -87,7 +87,7 @@ export default function GraphiquesPage() {
       {/* Bar Chart */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Graphique en barres</h2>
-        <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+        <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
           <p className="text-sm text-bleu-nuit/60 mb-4">Inscriptions mensuelles (2026)</p>
 
           {/* Y-axis + bars */}
@@ -148,7 +148,7 @@ export default function GraphiquesPage() {
       {/* Donut Chart */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Graphique circulaire</h2>
-        <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+        <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
           <p className="text-sm text-bleu-nuit/60 mb-6">Répartition d'un portefeuille diversifié</p>
           <DonutChart />
         </div>
@@ -157,7 +157,7 @@ export default function GraphiquesPage() {
       {/* Line Chart (SVG) */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Graphique linéaire</h2>
-        <div className="bg-white rounded-xl p-6 border border-gris-leger/30">
+        <div className="bg-white rounded-lg p-6 border border-gris-leger/30">
           <p className="text-sm text-bleu-nuit/60 mb-6">Évolution du capital (simulation)</p>
           <svg viewBox="0 0 400 200" className="w-full h-48">
             <defs>
@@ -201,15 +201,15 @@ export default function GraphiquesPage() {
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Règles chromatiques</h2>
         <div className="space-y-3">
-          <div className="bg-white rounded-xl p-5 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-5 border border-gris-leger/30">
             <h3 className="font-semibold mb-1">Palette de données</h3>
             <p className="text-sm text-bleu-nuit/80">Utiliser les couleurs brand dans cet ordre : Teal, Bleu nuit, Prune, Sauge, Teal clair. Max 5 segments distincts.</p>
           </div>
-          <div className="bg-white rounded-xl p-5 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-5 border border-gris-leger/30">
             <h3 className="font-semibold mb-1">Positif / Négatif</h3>
             <p className="text-sm text-bleu-nuit/80">Toujours utiliser les couleurs fonctionnelles : <span className="text-success font-medium">succès (#4CAF82)</span> pour le positif, <span className="text-error font-medium">erreur (#E05252)</span> pour le négatif.</p>
           </div>
-          <div className="bg-white rounded-xl p-5 border border-gris-leger/30">
+          <div className="bg-white rounded-lg p-5 border border-gris-leger/30">
             <h3 className="font-semibold mb-1">Typographie données</h3>
             <p className="text-sm text-bleu-nuit/80">Toujours utiliser <code className="font-mono text-teal bg-teal/5 px-1 rounded">JetBrains Mono</code> pour les chiffres et valeurs numériques.</p>
           </div>

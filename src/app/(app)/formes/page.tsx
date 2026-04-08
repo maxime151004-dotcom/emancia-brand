@@ -68,7 +68,7 @@ export default function FormesPage() {
         <h2 className="text-xl font-semibold mb-4">Formes</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {shapes.map((s) => (
-            <div key={s.name} className="flex flex-col items-center gap-3 bg-white rounded-xl p-6 border border-gris-leger/30">
+            <div key={s.name} className="flex flex-col items-center gap-3 bg-white rounded-lg p-6 border border-gris-leger/30">
               <div
                 className="transition-all duration-300"
                 style={{
@@ -97,7 +97,7 @@ export default function FormesPage() {
         </div>
         <div className="space-y-3">
           {radiusTokens.map((t) => (
-            <div key={t.name} className={`flex items-center gap-4 bg-white rounded-xl p-4 border ${
+            <div key={t.name} className={`flex items-center gap-4 bg-white rounded-lg p-4 border ${
               t.status === 'standard' ? 'border-teal/20' : t.status === 'exception' ? 'border-warning/20' : 'border-gris-leger/30'
             }`}>
               <div
@@ -161,7 +161,7 @@ export default function FormesPage() {
           ].map((s) => (
             <div
               key={s.name}
-              className="bg-white rounded-xl p-6 flex flex-col items-center gap-3"
+              className="bg-white rounded-lg p-6 flex flex-col items-center gap-3"
               style={{ boxShadow: s.shadow }}
             >
               <p className="text-sm font-medium">shadow-{s.name}</p>
@@ -173,7 +173,7 @@ export default function FormesPage() {
       {/* Spacing principles */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Principes d&apos;espacement</h2>
-        <div className="bg-white rounded-xl p-8 border border-gris-leger/30">
+        <div className="bg-white rounded-lg p-8 border border-gris-leger/30">
           <p className="text-sm text-bleu-nuit/70 mb-2">
             Le syst&egrave;me d&apos;espacement Emancia repose sur une <strong className="text-bleu-nuit">unit&eacute; de base de 4px</strong>.
             Tous les espacements (margins, paddings, gaps) sont des multiples de cette unit&eacute;.

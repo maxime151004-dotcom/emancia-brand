@@ -15,7 +15,7 @@ const hierarchy = [
 
 function FontCard({ role, spec }: { role: string; spec: typeof brand.typography.display }) {
   return (
-    <div className="bg-white rounded-xl p-8 border border-gris-leger mb-6">
+    <div className="bg-white rounded-lg p-8 border border-gris-leger mb-6">
       <div className="flex items-baseline justify-between mb-4">
         <h3 className="text-lg font-semibold">{role}</h3>
         <span className="text-xs font-mono text-bleu-nuit/60">
@@ -56,7 +56,7 @@ export default function TypographiePage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Hiérarchie typographique</h2>
-        <div className="bg-white rounded-xl border border-gris-leger overflow-hidden">
+        <div className="bg-white rounded-lg border border-gris-leger overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gris-leger bg-teal-clair/50">
@@ -86,7 +86,7 @@ export default function TypographiePage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Aperçu en contexte</h2>
-        <div className="bg-white rounded-xl p-8 border border-gris-leger space-y-4">
+        <div className="bg-white rounded-lg p-8 border border-gris-leger space-y-4">
           <h3 className="font-display text-3xl font-bold text-bleu-nuit">
             Comprendre l'inflation en 5 minutes
           </h3>

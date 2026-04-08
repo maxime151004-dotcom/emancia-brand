@@ -1,10 +1,28 @@
+'use client'
+
+import { useState } from 'react'
+import { Menu } from 'lucide-react'
 import { Sidebar } from '@/components/Sidebar'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   return (
     <>
-      <Sidebar />
-      <main className="flex-1 ml-64 p-12 max-w-6xl">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      {/* Mobile header with hamburger */}
+      <div className="fixed top-0 left-0 right-0 z-20 flex items-center h-14 px-4 bg-white border-b border-gray-200 md:hidden">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="p-2 -ml-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+          aria-label="Menu"
+        >
+          <Menu size={22} />
+        </button>
+      </div>
+
+      <main className="flex-1 ml-0 md:ml-64 pt-14 md:pt-0 p-6 md:p-12 max-w-6xl">
         {children}
       </main>
     </>

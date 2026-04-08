@@ -84,6 +84,8 @@ Créer un projet Next.js (App Router) avec :
     - 4 colonnes de statut : Idée → Validé → En cours → Publié
     - **Drag & drop** : glisser les cartes entre colonnes pour changer le statut (HTML5 Drag API, mise à jour optimiste en base)
     - **Calendrier milestone** en dessous du kanban : vue par semaine (4 semaines), drag & drop des idées validées sur des dates pour planifier le tournage
+    - **Réordonnancement intra-colonne** : drag & drop entre cartes dans la même colonne (détection before/after via midpoint Y)
+    - **Système de likes** : bouton cœur, compteur, tri par popularité, mise à jour optimiste
     - Toggle Board / Liste en haut à droite
     - Barre de stats avec compteurs par statut
     - Filtre multi-plateforme (chips toggle, opérateur overlap)
@@ -91,12 +93,23 @@ Créer un projet Next.js (App Router) avec :
     - Chaque membre peut modifier/supprimer ses propres idées uniquement
     - Formulaire modal pour création/édition
 
+14. **Conformité** (\`/conformite\`) — Checklist de conformité avant publication :
+    - Upload d'un visuel (image), PDF ou PowerPoint (.pptx)
+    - Analyse automatique : couleurs dominantes vs palette brand, contraste WCAG
+    - Coller du texte : détection mots interdits, ton éditorial, expressions préférées
+    - Score global circulaire (SVG gauge), résultats groupés par catégorie
+    - Extraction texte PDF via \`pdfjs-dist\` (import dynamique pour éviter SSR)
+    - Extraction texte PPTX via \`JSZip\` (parsing XML des slides)
+15. **Présentation** (\`/presentation\`) — Slides interactifs de présentation de la marque
+
 ### Navigation sidebar (groupée)
 \`\`\`
 Fondamentaux : Identité, Logo, Couleurs, Typographie
-Communication : Ton éditorial, Idées de contenus
+Communication : Ton éditorial
+CTA : Idées de contenus (avec icône Lightbulb)
 Outils : Icônes, Composants, Formes, Graphiques, Tokens
-Mise en pratique : Contextes, Do/Don't
+Mise en pratique : Contextes, Do/Don't, Conformité
+Bas de sidebar : Présentation, Mon profil
 \`\`\`
 
 ---
@@ -143,6 +156,8 @@ CREATE TABLE content_ideas (
   link TEXT,
   status TEXT DEFAULT 'idee',
   scheduled_date DATE,
+  liked_by TEXT[] DEFAULT '{}',
+  position INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
@@ -224,7 +239,7 @@ export function PromptTemplate() {
     <div className="mt-8">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 w-full px-5 py-4 bg-bleu-nuit/5 hover:bg-bleu-nuit/8 rounded-xl transition-colors text-left group"
+        className="flex items-center gap-3 w-full px-5 py-4 bg-bleu-nuit/5 hover:bg-bleu-nuit/8 rounded-lg transition-colors text-left group"
       >
         <div className="w-10 h-10 rounded-lg bg-bleu-nuit/10 flex items-center justify-center shrink-0">
           <FileText size={18} className="text-bleu-nuit" />
@@ -243,7 +258,7 @@ export function PromptTemplate() {
       </button>
 
       {isOpen && (
-        <div className="mt-3 rounded-xl border border-gris-leger/30 overflow-hidden">
+        <div className="mt-3 rounded-lg border border-gris-leger/30 overflow-hidden">
           {/* Toolbar */}
           <div className="flex items-center justify-between px-4 py-2.5 bg-blanc-casse border-b border-gris-leger/30">
             <span className="text-xs text-bleu-nuit/50 font-medium">

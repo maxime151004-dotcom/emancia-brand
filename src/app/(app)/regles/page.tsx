@@ -100,7 +100,7 @@ export default function ReglesPage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-bleu-nuit mb-6">Accessibilité</h2>
-        <div className="bg-white rounded-xl p-8 border border-gris-leger space-y-6">
+        <div className="bg-white rounded-lg p-8 border border-gris-leger space-y-6">
           {/* Contrastes WCAG */}
           <div>
             <h3 className="text-lg font-semibold text-bleu-nuit mb-3">Ratios de contraste WCAG</h3>
