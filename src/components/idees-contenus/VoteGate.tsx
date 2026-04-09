@@ -1,4 +1,4 @@
-import { X, Heart, Vote } from 'lucide-react'
+import { X, Heart, ThumbsUp } from 'lucide-react'
 import type { ContentIdea } from './types'
 import { getPlatformInfo, getIdeaPlatforms, timeAgo } from './utils'
 
@@ -32,7 +32,7 @@ export function VoteGate({ ideas, userId, minVotes, userLikeCount, onLike, onClo
             <X size={18} />
           </button>
           <div className="w-12 h-12 rounded-full bg-error/10 flex items-center justify-center mx-auto mb-3">
-            <Vote size={24} className="text-error" />
+            <ThumbsUp size={24} className="text-error" />
           </div>
           <h3 className="font-display text-lg font-semibold text-bleu-nuit">
             Vote d&apos;abord !
