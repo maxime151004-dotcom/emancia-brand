@@ -424,6 +424,20 @@ export default function IdeesContenusPage() {
     ? [...filteredIdeas].sort((a, b) => (b.liked_by?.length || 0) - (a.liked_by?.length || 0))
     : filteredIdeas
 
+  // ---- Vote gate ----
+  const userLikeCount = userId
+    ? ideas.filter(i => i.user_id !== userId && (i.liked_by || []).includes(userId)).length
+    : 0
+  const hasEnoughVotes = userLikeCount >= MIN_VOTES_REQUIRED || ideas.length < MIN_VOTES_REQUIRED
+
+  // Auto-close vote gate when enough votes reached
+  useEffect(() => {
+    if (showVoteGate && hasEnoughVotes) {
+      setShowVoteGate(false)
+      setShowForm(true)
+    }
+  }, [showVoteGate, hasEnoughVotes])
+
   // ---- Loading ----
 
   if (loading) {
@@ -434,12 +448,6 @@ export default function IdeesContenusPage() {
     )
   }
 
-  // ---- Vote gate ----
-  const userLikeCount = userId
-    ? ideas.filter(i => i.user_id !== userId && (i.liked_by || []).includes(userId)).length
-    : 0
-  const hasEnoughVotes = userLikeCount >= MIN_VOTES_REQUIRED || ideas.length < MIN_VOTES_REQUIRED
-
   const handleNewIdea = () => {
     if (hasEnoughVotes) {
       resetForm()
@@ -448,14 +456,6 @@ export default function IdeesContenusPage() {
       setShowVoteGate(true)
     }
   }
-
-  // Auto-close vote gate when enough votes reached
-  useEffect(() => {
-    if (showVoteGate && hasEnoughVotes) {
-      setShowVoteGate(false)
-      setShowForm(true)
-    }
-  }, [showVoteGate, hasEnoughVotes])
 
   // ---- Expanded idea ----
   const expandedIdea = expandedId ? ideas.find(i => i.id === expandedId) : null
