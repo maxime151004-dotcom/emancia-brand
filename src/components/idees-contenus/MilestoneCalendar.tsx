@@ -40,11 +40,11 @@ export function MilestoneCalendar({
   const todayKey = formatDateKey(new Date())
 
   return (
-    <div className="mt-10 bg-white rounded-lg border border-gris-leger/30 p-6">
+    <div className="bg-white rounded-lg border border-gris-leger/30 p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <CalendarDays size={20} className="text-teal" />
-          <h2 className="font-display text-xl font-semibold text-bleu-nuit">Calendrier de tournage</h2>
+          <CalendarDays size={18} className="text-teal" />
+          <h2 className="text-sm font-semibold text-bleu-nuit">Planification</h2>
         </div>
         <div className="flex items-center gap-2">
           <button

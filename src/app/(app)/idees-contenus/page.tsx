@@ -2,13 +2,15 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Plus, Columns3, List, Heart, Lightbulb } from 'lucide-react'
+import { Plus, Columns3, List, CalendarDays, Heart, Lightbulb, SlidersHorizontal, X } from 'lucide-react'
 import {
-  KanbanCard, IdeaDetail, IdeaForm, MilestoneCalendar, StatsBar, PlatformFilterChips,
+  KanbanCard, IdeaDetail, IdeaForm, MilestoneCalendar, PlatformFilterChips,
   STATUSES, PILLARS,
   getIdeaPlatforms,
 } from '@/components/idees-contenus'
 import type { ContentIdea } from '@/components/idees-contenus'
+
+type ViewMode = 'board' | 'list' | 'calendar'
 
 export default function IdeesContenusPage() {
   const [ideas, setIdeas] = useState<ContentIdea[]>([])
@@ -18,7 +20,8 @@ export default function IdeesContenusPage() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [filterPlatforms, setFilterPlatforms] = useState<string[]>([])
   const [filterPillar, setFilterPillar] = useState<string | null>(null)
-  const [viewMode, setViewMode] = useState<'board' | 'list'>('board')
+  const [showFilters, setShowFilters] = useState(false)
+  const [viewMode, setViewMode] = useState<ViewMode>('board')
   const [error, setError] = useState('')
   const [weekOffset, setWeekOffset] = useState(0)
   const [sortByLikes, setSortByLikes] = useState(false)
@@ -427,6 +430,9 @@ export default function IdeesContenusPage() {
 
   // ---- Filtering & sorting ----
 
+  const hasActiveFilters = filterPlatforms.length > 0 || filterPillar !== null
+  const activeFilterCount = filterPlatforms.length + (filterPillar ? 1 : 0)
+
   const filteredIdeas = ideas.filter(idea => {
     if (filterPlatforms.length > 0) {
       const ideaPlatforms = getIdeaPlatforms(idea)
@@ -455,120 +461,156 @@ export default function IdeesContenusPage() {
     setShowForm(true)
   }
 
-  // ---- Expanded idea ----
   const expandedIdea = expandedId ? ideas.find(i => i.id === expandedId) : null
 
-  const hasActiveFilters = filterPlatforms.length > 0 || filterPillar !== null
+  // ---- Status counts for tabs ----
+  const statusCounts = STATUSES.reduce((acc, s) => {
+    acc[s.value] = ideas.filter(i => i.status === s.value).length
+    return acc
+  }, {} as Record<string, number>)
+
+  const views: { key: ViewMode; label: string; icon: typeof Columns3 }[] = [
+    { key: 'board', label: 'Board', icon: Columns3 },
+    { key: 'list', label: 'Liste', icon: List },
+    { key: 'calendar', label: 'Calendrier', icon: CalendarDays },
+  ]
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-start justify-between">
-          <div>
-            <h1 className="font-display text-3xl font-semibold text-bleu-nuit mb-2">
-              Idées de contenus
-            </h1>
-            <p className="text-sm text-bleu-nuit/70 max-w-xl leading-relaxed">
-              Proposez des idées de contenus pour les réseaux sociaux et YouTube.
-              Glissez-déposez les cartes entre les colonnes pour changer leur statut, réorganisez-les par priorité, ou planifiez le tournage sur le calendrier.
-            </p>
-          </div>
-          <button
-            onClick={handleNewIdea}
-            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors shrink-0 bg-teal text-white hover:bg-teal-dark"
-          >
-            <Plus size={16} />
-            Nouvelle idée
-          </button>
+      {/* Header — compact */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="font-display text-2xl font-semibold text-bleu-nuit">
+            Idées de contenus
+          </h1>
+          <p className="text-sm text-bleu-nuit/50 mt-0.5">
+            {ideas.length} idée{ideas.length !== 1 ? 's' : ''}
+            {' '}&middot;{' '}
+            {statusCounts.valide || 0} validée{(statusCounts.valide || 0) !== 1 ? 's' : ''}
+            {' '}&middot;{' '}
+            {statusCounts.en_cours || 0} en cours
+            {' '}&middot;{' '}
+            {statusCounts.publie || 0} publiée{(statusCounts.publie || 0) !== 1 ? 's' : ''}
+          </p>
         </div>
+        <button
+          onClick={handleNewIdea}
+          className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors bg-teal text-white hover:bg-teal-dark"
+        >
+          <Plus size={16} />
+          Nouvelle idée
+        </button>
       </div>
 
-      {/* Stats */}
-      <StatsBar ideas={ideas} />
+      {/* Toolbar — une seule ligne */}
+      <div className="flex items-center gap-2 mb-5">
+        {/* View tabs */}
+        <div className="flex items-center bg-white rounded-lg border border-gris-leger/30 p-0.5">
+          {views.map(v => {
+            const Icon = v.icon
+            return (
+              <button
+                key={v.key}
+                onClick={() => setViewMode(v.key)}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-medium transition-all ${
+                  viewMode === v.key ? 'bg-teal text-white shadow-sm' : 'text-bleu-nuit/50 hover:text-bleu-nuit'
+                }`}
+              >
+                <Icon size={14} />
+                {v.label}
+              </button>
+            )
+          })}
+        </div>
 
-      {/* Filters */}
-      <div className="bg-white rounded-lg border border-gris-leger/30 p-4 mb-6 space-y-3">
-        {/* Row 1: Plateformes + View toggle */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 flex-wrap flex-1">
-            <span className="text-[10px] uppercase tracking-wider text-bleu-nuit/40 font-medium shrink-0">Plateformes</span>
-            <PlatformFilterChips selected={filterPlatforms} onChange={setFilterPlatforms} />
+        <div className="flex-1" />
+
+        {/* Sort by likes */}
+        <button
+          onClick={() => setSortByLikes(!sortByLikes)}
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all border ${
+            sortByLikes
+              ? 'border-error/30 bg-error/5 text-error'
+              : 'border-gris-leger/30 bg-white text-bleu-nuit/50 hover:text-error/60'
+          }`}
+        >
+          <Heart size={13} fill={sortByLikes ? 'currentColor' : 'none'} />
+          Likes
+        </button>
+
+        {/* Filter toggle */}
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all border ${
+            showFilters || hasActiveFilters
+              ? 'border-teal/30 bg-teal/5 text-teal'
+              : 'border-gris-leger/30 bg-white text-bleu-nuit/50 hover:text-bleu-nuit'
+          }`}
+        >
+          <SlidersHorizontal size={13} />
+          Filtres
+          {activeFilterCount > 0 && (
+            <span className="ml-0.5 w-4.5 h-4.5 flex items-center justify-center rounded-full bg-teal text-white text-[10px] font-bold leading-none px-1.5 py-0.5">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Filter panel — collapsible */}
+      {showFilters && (
+        <div className="bg-white rounded-lg border border-gris-leger/30 p-4 mb-5 animate-in slide-in-from-top-2 duration-200">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-semibold text-bleu-nuit/70">Filtrer par</span>
+            {hasActiveFilters && (
+              <button
+                onClick={() => { setFilterPlatforms([]); setFilterPillar(null) }}
+                className="flex items-center gap-1 text-[11px] text-bleu-nuit/40 hover:text-bleu-nuit/70 transition-colors"
+              >
+                <X size={12} />
+                Tout effacer
+              </button>
+            )}
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => setSortByLikes(!sortByLikes)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all border ${
-                sortByLikes
-                  ? 'border-error/30 bg-error/5 text-error'
-                  : 'border-gris-leger/50 text-bleu-nuit/40 hover:border-error/20 hover:text-error/60'
-              }`}
-            >
-              <Heart size={12} fill={sortByLikes ? 'currentColor' : 'none'} />
-              Likes
-            </button>
-            <div className="flex items-center gap-0.5 bg-blanc-casse rounded-lg border border-gris-leger/30 p-0.5">
-              <button
-                onClick={() => setViewMode('board')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                  viewMode === 'board' ? 'bg-teal text-white' : 'text-bleu-nuit/50 hover:text-bleu-nuit'
-                }`}
-              >
-                <Columns3 size={13} />
-                Board
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                  viewMode === 'list' ? 'bg-teal text-white' : 'text-bleu-nuit/50 hover:text-bleu-nuit'
-                }`}
-              >
-                <List size={13} />
-                Liste
-              </button>
+
+          <div className="space-y-3">
+            <div>
+              <label className="block text-[10px] uppercase tracking-wider text-bleu-nuit/40 font-medium mb-1.5">Plateforme</label>
+              <PlatformFilterChips selected={filterPlatforms} onChange={setFilterPlatforms} />
+            </div>
+
+            <div>
+              <label className="block text-[10px] uppercase tracking-wider text-bleu-nuit/40 font-medium mb-1.5">Pilier</label>
+              <div className="flex flex-wrap gap-1.5">
+                {PILLARS.map(p => (
+                  <button
+                    key={p.value}
+                    onClick={() => setFilterPillar(filterPillar === p.value ? null : p.value)}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium transition-all border ${
+                      filterPillar === p.value
+                        ? 'border-current bg-current/10'
+                        : 'border-gris-leger/40 text-bleu-nuit/50 hover:border-bleu-nuit/20'
+                    }`}
+                    style={filterPillar === p.value ? { color: p.color } : undefined}
+                  >
+                    <span>{p.emoji}</span>
+                    {p.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Row 2: Piliers */}
-        <div className="flex items-center gap-3 flex-wrap">
-          <span className="text-[10px] uppercase tracking-wider text-bleu-nuit/40 font-medium shrink-0">Piliers</span>
-          <div className="flex items-center gap-1.5 flex-wrap">
-            {PILLARS.map(p => (
-              <button
-                key={p.value}
-                onClick={() => setFilterPillar(filterPillar === p.value ? null : p.value)}
-                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium transition-all border ${
-                  filterPillar === p.value
-                    ? 'border-current bg-current/10'
-                    : 'border-gris-leger/40 text-bleu-nuit/50 hover:border-bleu-nuit/20'
-                }`}
-                style={filterPillar === p.value ? { color: p.color } : undefined}
-              >
-                <span>{p.emoji}</span>
-                {p.label}
-              </button>
-            ))}
-          </div>
-          {hasActiveFilters && (
-            <button
-              onClick={() => { setFilterPlatforms([]); setFilterPillar(null) }}
-              className="ml-auto text-xs text-bleu-nuit/40 hover:text-bleu-nuit/70 transition-colors underline shrink-0"
-            >
-              Réinitialiser
-            </button>
-          )}
-        </div>
-      </div>
+      )}
 
       {/* Error */}
       {error && (
-        <div className="mb-6 p-4 rounded-lg bg-error/10 text-error text-sm border border-error/20">
+        <div className="mb-5 p-4 rounded-lg bg-error/10 text-error text-sm border border-error/20">
           {error}
         </div>
       )}
 
-      {/* Form modal */}
+      {/* Modals */}
       {showForm && (
         <IdeaForm
           editingId={editingId}
@@ -595,7 +637,6 @@ export default function IdeesContenusPage() {
         />
       )}
 
-      {/* Expanded card modal */}
       {expandedIdea && (
         <IdeaDetail
           idea={expandedIdea}
@@ -607,8 +648,10 @@ export default function IdeesContenusPage() {
         />
       )}
 
-      {/* Content */}
-      {sortedFilteredIdeas.length === 0 ? (
+      {/* ===================== VIEWS ===================== */}
+
+      {/* Empty state */}
+      {sortedFilteredIdeas.length === 0 && viewMode !== 'calendar' ? (
         <div className="bg-white rounded-lg border border-gris-leger/30 p-12 text-center">
           <Lightbulb size={40} className="mx-auto text-bleu-nuit/20 mb-4" />
           <p className="text-bleu-nuit/50 text-sm mb-4">
@@ -627,6 +670,7 @@ export default function IdeesContenusPage() {
           )}
         </div>
       ) : viewMode === 'board' ? (
+        /* ---- BOARD VIEW ---- */
         <div className="grid grid-cols-4 gap-4">
           {STATUSES.map(status => {
             const columnIdeas = sortedFilteredIdeas
@@ -651,7 +695,7 @@ export default function IdeesContenusPage() {
               >
                 <div className={`flex items-center justify-between px-3 py-3 rounded-t-lg ${status.headerBg}`}>
                   <div className="flex items-center gap-2">
-                    <div className={`w-2.5 h-2.5 rounded-full ${status.dot}`} />
+                    <div className={`w-2 h-2 rounded-full ${status.dot}`} />
                     <span className={`text-sm font-semibold ${status.text}`}>{status.label}</span>
                   </div>
                   <span className={`text-xs font-mono font-medium ${status.text} opacity-60`}>
@@ -701,7 +745,8 @@ export default function IdeesContenusPage() {
             )
           })}
         </div>
-      ) : (
+      ) : viewMode === 'list' ? (
+        /* ---- LIST VIEW ---- */
         <div className="space-y-3">
           {sortedFilteredIdeas.map(idea => (
             <KanbanCard
@@ -719,21 +764,21 @@ export default function IdeesContenusPage() {
             />
           ))}
         </div>
+      ) : (
+        /* ---- CALENDAR VIEW ---- */
+        <MilestoneCalendar
+          ideas={ideas}
+          weekOffset={weekOffset}
+          onWeekOffsetChange={setWeekOffset}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          onScheduleDate={handleScheduleDate}
+          dragOverDate={dragOverDate}
+          onCalendarDragOver={handleCalendarDragOver}
+          onCalendarDragLeave={handleCalendarDragLeave}
+          onCalendarDrop={handleCalendarDrop}
+        />
       )}
-
-      {/* Milestone Calendar */}
-      <MilestoneCalendar
-        ideas={ideas}
-        weekOffset={weekOffset}
-        onWeekOffsetChange={setWeekOffset}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-        onScheduleDate={handleScheduleDate}
-        dragOverDate={dragOverDate}
-        onCalendarDragOver={handleCalendarDragOver}
-        onCalendarDragLeave={handleCalendarDragLeave}
-        onCalendarDrop={handleCalendarDrop}
-      />
     </div>
   )
 }
