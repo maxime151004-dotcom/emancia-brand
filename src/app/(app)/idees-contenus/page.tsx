@@ -439,16 +439,17 @@ export default function IdeesContenusPage() {
       created_at: new Date().toISOString(),
     }
 
-    // Optimistic update — use callback to get latest state and persist from it
-    let commentsToSave: IdeaComment[] = []
+    // Lire le state actuel AVANT la mise à jour pour construire le tableau complet
+    const currentIdea = ideas.find(i => i.id === ideaId)
+    const commentsToSave = [...(currentIdea?.comments || []), newComment]
+
+    // Optimistic update
     setIdeas(prev => prev.map(i => {
       if (i.id !== ideaId) return i
-      const updated = [...(i.comments || []), newComment]
-      commentsToSave = updated
-      return { ...i, comments: updated }
+      return { ...i, comments: commentsToSave }
     }))
 
-    // Persist to Supabase with the complete comments array
+    // Persist to Supabase
     try {
       const { error } = await supabase
         .from('content_ideas')
@@ -457,7 +458,7 @@ export default function IdeesContenusPage() {
 
       if (error) {
         console.warn('Comments not persisted (column may not exist):', error.message)
-        // Rollback optimistic update si la colonne n'existe pas
+        // Rollback optimistic update
         setIdeas(prev => prev.map(i => {
           if (i.id !== ideaId) return i
           return { ...i, comments: (i.comments || []).filter(c => c.id !== newComment.id) }
